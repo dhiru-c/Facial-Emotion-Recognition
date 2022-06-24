@@ -1,11 +1,9 @@
 import streamlit as st
 from keras.models import load_model
-# from streamlit import session_state
-# import av
 import cv2
 import numpy as np
 from time import sleep
-from tensorflow.keras.preprocessing.image import img_to_array
+from keras.utils import img_to_array
 
 classifier = load_model('mobilenet.h5')
 
