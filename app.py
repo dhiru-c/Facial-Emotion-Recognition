@@ -22,7 +22,7 @@ def face_detector(img):
     # Convert image to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
-    if faces is ():
+    if faces == ():
         return (0, 0, 0, 0), np.zeros((48, 48), np.uint8), img
     for (x, y, w, h) in faces:
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
