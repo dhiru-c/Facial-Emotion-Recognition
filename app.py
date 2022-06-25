@@ -2,10 +2,10 @@
 import numpy as np
 import cv2
 import streamlit as st
-#from tensorflow import keras
+from tensorflow import keras
 from keras.models import load_model
-from keras.preprocessing.image import img_to_array
-from streamlit_webrtc import webrtc_streamer,video_processor_factory
+from tensorflow.keras.preprocessing.image import img_to_array
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 # load model
 emotion_dict = ["Angry", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
@@ -13,7 +13,7 @@ emotion_dict = ["Angry", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise
 classifier = load_model('mobilenet.h5')
 
 # load weights into new model
-classifier.load_weights("vgg19.h5")
+classifier.load_weights("mobilenet.h5")
 
 # load face
 try:
@@ -22,7 +22,7 @@ except Exception:
     st.write("Error loading cascade classifiers")
 
 
-class VideoTransformer(video_processor_factory):
+class VideoProcessor(VideoTransformerBase):
     def transform(self, frame):
         img = frame.to_ndarray(format="bgr24")
 
@@ -70,7 +70,7 @@ def main():
     elif choice == "Webcam Face Detection":
         st.header("Webcam Live Feed")
         st.write("Click on start to use webcam and detect your face emotion")
-        webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
+        webrtc_streamer(key="example", video_transformer_factory=VideoProcessor)
 
     elif choice == "About":
         st.subheader("About this app")
