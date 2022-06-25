@@ -5,4 +5,4 @@ streamlit==1.10.0
 streamlit_webrtc==0.40.0
 tensorflow==2.9.1
 tensorflow_cpu==2.9.1
-~treamlit==1.10.0
+
